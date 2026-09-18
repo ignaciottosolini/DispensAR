@@ -1,0 +1,106 @@
+/* Tokens compartidos del diseño de DispensAR. Los valores de marca y barra lateral
+   son los del tema predeterminado: el ThemeProvider los reemplaza por tenant sobre
+   :root sin duplicar hojas de estilo. Los estados semánticos no se configuran. */
+:root {
+  color-scheme: light;
+  font-family: var(--fuente);
+  font-synthesis: none;
+
+  /* Marca: los cuatro valores base los define cada asociación. */
+  --color-primario: #195d4b;
+  --color-secundario: #2e6b52;
+  --color-foco: #69ae99;
+  --color-marca-suave: #e9f3ec;
+  --color-marca-superficie: #edf5f0;
+
+  /* Barra lateral: fondo y texto configurables; el resto se deriva. */
+  --color-sidebar-fondo: #ffffff;
+  --color-sidebar-texto: #526d60;
+  --color-sidebar-linea: #dce7e0;
+  --color-sidebar-suave: #6a8074;
+  --color-sidebar-seleccionado: #e9f3ec;
+  --color-sidebar-seleccionado-texto: #195d4b;
+
+  /* Fondos y superficies de la aplicación. */
+  --color-fondo: #eff5f2;
+  --color-superficie: #ffffff;
+  --color-superficie-suave: #f5f8f6;
+  --color-deshabilitado-fondo: #f1f5f2;
+  --color-deshabilitado-texto: #67796f;
+
+  /* Textos. */
+  --color-texto: #193c38;
+  --color-texto-suave: #526c63;
+  --color-texto-tenue: #61796e;
+  --color-texto-apagado: #72847b;
+  --color-texto-muy-suave: #6b8077;
+  --color-texto-etiqueta: #55756a;
+  --color-texto-tabla: #597165;
+
+  /* Bordes. */
+  --color-linea: #dce7e0;
+  --color-linea-suave: #eef2ef;
+  --color-linea-media: #e5ece7;
+  --color-linea-division: #e4ece7;
+  --color-linea-campo: #73978c;
+  --color-linea-control: #c9d9d2;
+
+  /* Estados semánticos: mismo significado para todos los tenants. */
+  --color-exito-fondo: #e3f2e8;
+  --color-exito-texto: #285c3d;
+  --color-exito-badge-fondo: #e8f4ec;
+  --color-exito-badge-texto: #285e40;
+  --color-exito-datos-fondo: #eaf5ed;
+  --color-exito-datos-texto: #296645;
+  --color-advertencia-fondo: #f7f4e9;
+  --color-advertencia-texto: #757044;
+  --color-error-fondo: #fff0ef;
+  --color-error-texto: #8b2424;
+  --color-error-control: #a23535;
+  --color-error-control-texto: #9b3434;
+  --color-error-linea: #e8c7c3;
+  --color-error-texto-suave: #68534f;
+  --color-neutro-fondo: #f4eeeb;
+  --color-neutro-texto: #805749;
+  --color-interruptor: #c4cfc9;
+
+  /* Estados de interacción. */
+  --sombra-foco: 3px;
+  --opacidad-deshabilitado: 0.5;
+
+  /* Tipografía. */
+  --fuente: system-ui, sans-serif;
+  --tamano-titulo: clamp(2.5rem, 8vw, 4rem);
+  --tamano-marca: 24px;
+  --interlineado: 1.6;
+  --peso-suave: 500;
+  --peso-medio: 600;
+  --peso-fuerte: 750;
+
+  /* Espaciados. */
+  --espacio-minimo: 4px;
+  --espacio-corto: 8px;
+  --espacio-medio: 12px;
+  --espacio-largo: 24px;
+  --espacio-seccion: 36px;
+
+  /* Tamaños. */
+  --alto-control: 11px;
+  --ancho-formulario: 480px;
+  --ancho-contenido: 760px;
+  --ancho-panel: 1440px;
+  --columna-sidebar: 220px;
+  --alto-area-tactil: 44px;
+
+  /* Radios. */
+  --radio-corto: 6px;
+  --radio-control: 8px;
+  --radio-medio: 9px;
+  --radio-largo: 14px;
+  --radio-cuadro: 16px;
+  --radio-circulo: 20px;
+
+  /* Sombras. */
+  --sombra-tarjeta: 0 3px 12px #214b3505;
+  --sombra-control: 0 1px 3px #0002;
+}

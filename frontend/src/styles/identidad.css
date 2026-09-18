@@ -1,0 +1,53 @@
+/* Configuración → Identidad visual: formulario, logos, colores y previsualización. */
+.identidad { max-width: var(--ancho-panel); margin: 0 auto; padding: var(--espacio-seccion) clamp(20px, 3vw, 44px) 64px; }
+.identidad h1 { font-size: clamp(26px, 3vw, 36px); letter-spacing: -1px; margin: var(--espacio-medio) 0; }
+.identidad h2 { font-size: 21px; }
+.identidad-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; align-items: start; }
+.identidad-seccion p { font-size: 14px; color: var(--color-texto-tenue); line-height: var(--interlineado); }
+.identidad-aviso { padding: var(--espacio-medio) 16px; border-radius: var(--radio-control); background: var(--color-advertencia-fondo); color: var(--color-advertencia-texto); font-size: 14px; line-height: var(--interlineado); }
+.identidad-leyenda { font-size: 12px; color: var(--color-texto-tenue); margin: var(--espacio-medio) 0 0; }
+.identidad-estado { font-size: 13px; color: var(--color-texto-tenue); line-height: var(--interlineado); margin: 14px 0 0; }
+
+/* Logos. */
+.logo-casilla { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: var(--espacio-largo); align-items: center; margin-top: var(--espacio-medio); }
+.logo-marco { min-height: 72px; max-height: 96px; display: grid; place-items: center; border: 1px dashed var(--color-linea-campo); border-radius: var(--radio-medio); background: var(--color-superficie-suave); overflow: hidden; padding: 6px; }
+.logo-marco img { max-width: 100%; max-height: 84px; width: auto; height: auto; object-fit: contain; }
+.logo-marco span { font-size: 12px; color: var(--color-texto-apagado); }
+.logo-acciones { display: flex; flex-direction: column; align-items: flex-start; gap: var(--espacio-corto); }
+.logo-acciones input[type=file] { width: auto; padding: 0; border: 0; font-size: 12px; color: var(--color-texto-suave); background: transparent; }
+.logo-datos { font-size: 12px; color: var(--color-texto-tenue); line-height: var(--interlineado); overflow-wrap: anywhere; }
+
+/* Colores. */
+.color-casilla { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: var(--espacio-medio); align-items: end; margin-top: var(--espacio-medio); }
+.color-casilla input[type=color] { width: 56px; height: 44px; padding: 3px; border: 1px solid var(--color-linea-campo); border-radius: var(--radio-control); background: var(--color-superficie); }
+.color-casilla input[type=text] { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; text-transform: lowercase; }
+.color-muestra { display: flex; align-items: center; gap: 10px; margin-top: 6px; font-size: 12px; color: var(--color-texto-tenue); }
+.color-muestra .state-badge { white-space: nowrap; }
+
+/* Previsualización con los mismos componentes que usa la aplicación. */
+.identidad-preview { border: 1px solid var(--color-linea); border-radius: var(--radio-cuadro); overflow: hidden; box-shadow: var(--sombra-tarjeta); position: sticky; top: 20px; padding: 0; margin: 0; }
+.preview-topbar { background: var(--color-superficie); border-bottom: 1px solid var(--color-linea); padding: 18px 22px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+.preview-body { display: grid; grid-template-columns: 180px minmax(0, 1fr); min-height: 320px; }
+.preview-sidebar { background: var(--color-sidebar-fondo); border-right: 1px solid var(--color-sidebar-linea); padding: 22px 12px; }
+.preview-sidebar .eyebrow { padding-left: var(--espacio-medio); color: var(--color-sidebar-texto); }
+.preview-sidebar .nav-item { width: 100%; display: flex; align-items: center; gap: var(--espacio-medio); text-align: left; border: 0; border-radius: var(--radio-medio); background: transparent; color: var(--color-sidebar-texto); margin-top: 6px; padding: 12px 12px; font-size: 14px; }
+.preview-sidebar .nav-item.selected { color: var(--color-sidebar-seleccionado-texto); background: var(--color-sidebar-seleccionado); }
+.preview-sidebar .nav-item span { font-size: 18px; }
+.preview-contenido { padding: 22px; background: var(--color-fondo); min-width: 0; }
+.preview-botones { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 22px; }
+.preview-badges { display: flex; gap: var(--espacio-corto); flex-wrap: wrap; margin-top: var(--espacio-largo); }
+.preview-tarjetas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--espacio-medio); }
+.preview-caption { text-align: left; font-size: 12px; color: var(--color-texto-tenue); padding: 12px 16px; margin: 0; border-top: 1px solid var(--color-linea-suave); background: var(--color-superficie); }
+.identidad-pie { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; margin-top: var(--espacio-largo); }
+.identidad-pie .editor-actions { margin-top: 0; }
+
+@media(max-width: 1100px) { .identidad-layout { grid-template-columns: minmax(0, 1fr); } .identidad-preview { position: static; } }
+@media(max-width: 760px) {
+  .identidad { padding-left: max(20px, env(safe-area-inset-left)); padding-right: max(20px, env(safe-area-inset-right)); }
+  .logo-casilla { grid-template-columns: minmax(0, 1fr); }
+  .preview-body { grid-template-columns: minmax(0, 1fr); }
+  .preview-sidebar { border-right: 0; border-bottom: 1px solid var(--color-sidebar-linea); }
+}
+@media(max-width: 640px) { .preview-tarjetas { grid-template-columns: minmax(0, 1fr); } }
+/* Área táctil mínima de 44px en dispositivos de puntero burdo. */
+@media(pointer: coarse) { .identidad-pie button, .logo-acciones button, .identidad .dashboard-actions button { min-height: var(--alto-area-tactil); } }

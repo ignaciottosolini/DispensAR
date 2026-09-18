@@ -1,0 +1,2 @@
+/* Pantalla de acceso: identidad genérica de DispensAR, sin tema de tenant. */
+.login { max-width: var(--ancho-formulario); }

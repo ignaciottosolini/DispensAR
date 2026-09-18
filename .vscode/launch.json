@@ -1,0 +1,1 @@
+{"version":"0.2.0","configurations":[{"name":"Depurar API","type":"coreclr","request":"launch","program":"${workspaceFolder}/backend/DispensAR.Api/bin/Debug/net10.0/DispensAR.Api.dll","cwd":"${workspaceFolder}/backend/DispensAR.Api","env":{"ASPNETCORE_ENVIRONMENT":"Development","ASPNETCORE_URLS":"http://localhost:5080","DOTNET_ROOT":"${workspaceFolder}/.dotnet"}}]}

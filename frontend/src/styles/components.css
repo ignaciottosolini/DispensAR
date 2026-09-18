@@ -1,0 +1,84 @@
+/* Componentes visuales compartidos: marca, shell, alertas, tarjetas, tablas y diálogos. */
+.eyebrow { letter-spacing: 2px; font-size: 11px; font-weight: var(--peso-fuerte); color: var(--color-texto-etiqueta); }
+
+/* Alertas y estados de mensaje. */
+.error { padding: var(--espacio-medio); border-radius: var(--radio-control); background: var(--color-error-fondo); color: var(--color-error-texto); font-size: 14px; }
+.notice { background: var(--color-exito-fondo); color: var(--color-exito-texto); padding: var(--espacio-medio) 16px; border-radius: var(--radio-control); }
+
+/* Encabezado de página compartido por todas las pantallas. */
+.dashboard-heading, .section-heading { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+.subtitle { color: var(--color-texto-tenue); font-size: 14px; margin-bottom: 0; }
+.dashboard-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+/* Barra superior y marca del tenant. */
+.topbar { background: var(--color-superficie); border-bottom: 1px solid var(--color-linea); padding: 20px clamp(20px, 5vw, 72px); display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+.session { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+.session strong { font-size: 13px; overflow-wrap: anywhere; }
+.session small { font-size: 11px; }
+.brand { display: flex; align-items: center; gap: var(--espacio-corto); text-decoration: none; color: var(--color-primario); font-size: var(--tamano-marca); font-weight: 800; letter-spacing: -1px; min-width: 0; }
+.brand-nombre { min-width: 0; }
+.brand-nombre > span { display: block; color: var(--color-texto-muy-suave); font-size: 11px; font-weight: var(--peso-suave); letter-spacing: .4px; margin-top: 3px; }
+.brand-logo { display: block; max-height: 40px; max-width: 160px; width: auto; object-fit: contain; }
+.brand-logo-compacto { display: none; }
+.brand-mark { width: 36px; height: 36px; flex-shrink: 0; border-radius: var(--radio-control); background: var(--color-marca-suave); color: var(--color-primario); display: grid; place-items: center; font-size: 14px; font-weight: 800; }
+
+/* Shell de trabajo: barra lateral + contenido. */
+.workspace-layout { display: grid; grid-template-columns: var(--columna-sidebar) minmax(0, 1fr); min-height: calc(100vh - 92px); }
+.sidebar { background: var(--color-sidebar-fondo); border-right: 1px solid var(--color-sidebar-linea); padding: 32px 18px; }
+.sidebar > .eyebrow { padding-left: var(--espacio-medio); color: var(--color-sidebar-texto); }
+.sidebar .nav-item { width: 100%; display: flex; align-items: center; gap: var(--espacio-medio); text-align: left; border: 0; border-radius: var(--radio-medio); background: transparent; color: var(--color-sidebar-texto); margin-top: 6px; padding: 13px 14px; font-size: 14px; }
+.sidebar .nav-item.selected { color: var(--color-sidebar-seleccionado-texto); background: var(--color-sidebar-seleccionado); }
+.nav-item span { font-size: 20px; }
+.sidebar-heading { margin: var(--espacio-seccion) var(--espacio-medio) var(--espacio-medio); }
+.sidebar-note { font-size: 12px; color: var(--color-sidebar-suave); margin: 42px var(--espacio-medio) 0; }
+.workspace-content { min-width: 0; }
+
+/* Tarjeta de indicador del dashboard, reutilizada por la previsualización de identidad. */
+.widget { background: var(--color-superficie); border: 1px solid var(--color-linea); border-radius: var(--radio-cuadro); padding: var(--espacio-largo); box-shadow: var(--sombra-tarjeta); }
+.widget-heading { display: flex; align-items: center; gap: 10px; }
+.widget-heading h2 { font-size: 14px; font-weight: 650; margin: 0; }
+.widget-icon { width: 32px; height: 32px; background: var(--color-marca-superficie); color: var(--color-secundario); border-radius: var(--radio-medio); display: grid; place-items: center; font-size: 23px; flex-shrink: 0; }
+.metric { margin: var(--espacio-largo) 0 10px; font-size: 44px; line-height: 1; font-weight: var(--peso-fuerte); letter-spacing: -1px; }
+.metric-unit { font-size: 15px; font-weight: var(--peso-medio); letter-spacing: 0; color: var(--color-texto-tenue); margin-left: var(--espacio-medio); }
+.metric-empty { font-size: 27px; color: var(--color-texto-apagado); }
+.widget-detail, .widget-loading { font-size: 13px; line-height: var(--interlineado); color: var(--color-texto-tenue); }
+.widget-status { display: inline-block; margin-top: 18px; padding: 5px 9px; border-radius: var(--radio-corto); font-size: 10px; font-weight: 650; color: var(--color-advertencia-texto); background: var(--color-advertencia-fondo); }
+.widget-status.connected { color: var(--color-exito-datos-texto); background: var(--color-exito-datos-fondo); }
+.branch-list { list-style: none; padding: 0; margin: 14px 0 0; }
+.branch-list li { border-top: 1px solid var(--color-linea-suave); padding: var(--espacio-corto) 0; font-size: 12px; }
+
+/* Etiquetas de estado. */
+.state-badge { font-size: 11px; padding: 5px 9px; background: var(--color-neutro-fondo); color: var(--color-neutro-texto); border-radius: var(--radio-corto); }
+.state-badge.active { background: var(--color-exito-badge-fondo); color: var(--color-exito-badge-texto); }
+.state-inline { margin-left: var(--espacio-corto); }
+
+/* Diálogo de confirmación. */
+.delete-confirmation { border-color: var(--color-error-linea); }
+.delete-confirmation p { line-height: var(--interlineado); color: var(--color-error-texto-suave); }
+
+/* Acciones de formulario, compartidas por catálogos, diálogos e identidad. */
+.editor-actions { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+.editor-actions button { width: auto; margin: 0; }
+
+@media(max-width: 640px) {
+  .dashboard-heading, .section-heading { flex-direction: column; align-items: stretch; gap: 14px; }
+  .dashboard-actions { width: 100%; }
+  .dashboard-actions button { flex: 1; }
+}
+@media(max-width: 580px) { .session { gap: 10px; } .editor-actions { width: 100%; } .editor-actions button { flex: 1 1 140px; } }
+@media(max-width: 760px) {
+  .workspace-layout { grid-template-columns: minmax(0, 1fr); }
+  .sidebar { padding: var(--espacio-medio) 0; border-right: 0; border-bottom: 1px solid var(--color-sidebar-linea); }
+  .sidebar > .eyebrow, .sidebar-heading, .sidebar-note { display: none; }
+  /* Menú deslizable: con cinco ítems ya no entra en el ancho del celular. */
+  .sidebar nav { display: flex; gap: var(--espacio-corto); overflow-x: auto; scrollbar-width: none; padding: 0 max(20px, env(safe-area-inset-right)) 0 max(20px, env(safe-area-inset-left)); }
+  .sidebar nav::-webkit-scrollbar { display: none; }
+  .sidebar .nav-item { width: auto; margin: 0; flex-shrink: 0; white-space: nowrap; }
+  .topbar { padding-left: max(20px, env(safe-area-inset-left)); padding-right: max(20px, env(safe-area-inset-right)); }
+  .brand-logo.con-compacto { display: none; }
+  .brand-logo-compacto { display: block; }
+}
+/* Área táctil mínima de 44px en dispositivos de puntero burdo. */
+@media(pointer: coarse) {
+  .sidebar .nav-item, .dashboard-actions button, .editor-actions button { min-height: var(--alto-area-tactil); }
+}

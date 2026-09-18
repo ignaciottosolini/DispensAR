@@ -1,0 +1,50 @@
+/* Catálogos de la asociación y de plataforma: elementos, pacientes, productos y lotes. */
+.catalog-page { max-width: var(--ancho-panel); margin: 0 auto; padding: var(--espacio-seccion) clamp(20px, 3vw, 44px) 64px; }
+.catalog-page h1 { font-size: clamp(26px, 3vw, 36px); letter-spacing: -1px; margin: var(--espacio-medio) 0; }
+.catalog-page h2 { font-size: 21px; }
+.catalog-page select { width: 100%; border: 1px solid var(--color-linea-campo); border-radius: var(--radio-control); padding: var(--espacio-medio); color: inherit; font: inherit; background: var(--color-superficie); }
+.catalog-form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 var(--espacio-largo); }
+.catalog-editor fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+.catalog-editor small { margin-top: 7px; font-size: 12px; }
+.catalog-editor input:disabled, .catalog-editor select:disabled { background: var(--color-deshabilitado-fondo); color: var(--color-deshabilitado-texto); }
+.checkbox-label { display: flex; align-items: center; gap: 10px; font-size: 14px; }
+.checkbox-label input { width: 18px; height: 18px; accent-color: var(--color-primario); }
+.catalog-impact { font-size: 13px; line-height: var(--interlineado); color: var(--color-texto-tenue); }
+.catalog-filters { display: grid; grid-template-columns: minmax(150px, 1fr) 180px; gap: 20px; margin-bottom: 22px; }
+.catalog-filters label { margin-top: 0; font-size: 13px; }
+.lote-filters { grid-template-columns: minmax(140px, 1fr) minmax(140px, 1fr) 150px; }
+
+/* Tabla que pasa a tarjetas en pantallas angostas. */
+.table-scroll { overflow-x: auto; }
+.catalog-list table { border-collapse: collapse; width: 100%; font-size: 13px; text-align: left; }
+.catalog-list caption { text-align: left; margin-bottom: 14px; color: var(--color-texto-tenue); }
+.catalog-list th { color: var(--color-texto-tabla); background: var(--color-superficie-suave); font-size: 12px; }
+.catalog-list td, .catalog-list th { padding: 14px 12px; border-bottom: 1px solid var(--color-linea-media); }
+.catalog-list td:first-child { min-width: 180px; }
+.catalog-list td small { font-size: 11px; margin-top: 5px; }
+.catalog-empty { padding: var(--espacio-largo) 0; text-align: center; color: var(--color-texto-tenue); }
+.row-actions { display: flex; gap: var(--espacio-corto); white-space: nowrap; }
+.row-actions button { font-size: 12px; padding: 7px 10px; }
+
+@media(max-width: 760px) {
+  .catalog-page { padding-left: max(20px, env(safe-area-inset-left)); padding-right: max(20px, env(safe-area-inset-right)); }
+  .catalog-form-grid { grid-template-columns: minmax(0, 1fr); }
+  .lote-filters { grid-template-columns: minmax(0, 1fr); }
+}
+@media(max-width: 640px) {
+  /* Las tablas pasan a tarjetas: cinco columnas no entran sin scroll horizontal. */
+  .table-scroll { overflow-x: visible; }
+  .catalog-list table { display: block; }
+  .catalog-list thead { display: none; }
+  .catalog-list tbody { display: block; }
+  .catalog-list tr { display: block; background: var(--color-superficie); border: 1px solid var(--color-linea); border-radius: var(--radio-largo); margin-bottom: 14px; padding: var(--espacio-minimo) 16px; }
+  .catalog-list td { display: flex; justify-content: space-between; align-items: center; gap: 16px; text-align: right; border-bottom: 0; border-top: 1px solid var(--color-linea-suave); padding: 13px 0; font-size: 14px; }
+  .catalog-list tr td:first-child { border-top: 0; }
+  .catalog-list td::before { content: attr(data-etiqueta); font-weight: 650; font-size: 12px; color: var(--color-texto-tabla); text-align: left; flex-shrink: 0; }
+  .catalog-list td small { margin-top: 3px; }
+  .catalog-list td:first-child { min-width: 0; flex-direction: column; align-items: flex-end; }
+  .catalog-list .row-actions { justify-content: flex-end; }
+}
+@media(max-width: 580px) { .catalog-filters { grid-template-columns: minmax(0, 1fr); } }
+/* Área táctil mínima de 44px en dispositivos de puntero burdo. */
+@media(pointer: coarse) { .row-actions button { min-height: var(--alto-area-tactil); } }

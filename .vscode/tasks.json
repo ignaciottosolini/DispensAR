@@ -1,0 +1,70 @@
+{
+    "version":  "2.0.0",
+    "tasks":  [
+                  {
+                      "label":  "API",
+                      "type":  "process",
+                      "command":  "${workspaceFolder}/.dotnet/dotnet.exe",
+                      "args":  [
+                                   "watch",
+                                   "--project",
+                                   "backend/DispensAR.Api"
+                               ],
+                      "problemMatcher":  "$msCompile",
+                      "isBackground":  true
+                  },
+                  {
+                      "label":  "React",
+                      "type":  "shell",
+                      "command":  "npm.cmd run dev",
+                      "options":  {
+                                      "cwd":  "${workspaceFolder}/frontend"
+                                  },
+                      "problemMatcher":  [
+
+                                         ],
+                      "isBackground":  true
+                  },
+                  {
+                      "label":  "Iniciar entorno",
+                      "dependsOn":  [
+                                        "API",
+                                        "React"
+                                    ],
+                      "dependsOrder":  "parallel",
+                      "problemMatcher":  [
+
+                                         ]
+                  },
+                  {
+                      "label":  "SQL Server: iniciar",
+                      "type":  "shell",
+                      "command":  "powershell.exe",
+                      "args":  [
+                                   "-NoProfile",
+                                   "-ExecutionPolicy",
+                                   "Bypass",
+                                   "-File",
+                                   "${workspaceFolder}/scripts/start-db.ps1"
+                               ],
+                      "problemMatcher":  [
+
+                                         ]
+                  },
+                  {
+                      "label":  "SQL Server: aplicar migraciones",
+                      "type":  "shell",
+                      "command":  "powershell.exe",
+                      "args":  [
+                                   "-NoProfile",
+                                   "-ExecutionPolicy",
+                                   "Bypass",
+                                   "-File",
+                                   "${workspaceFolder}/scripts/migrate-db.ps1"
+                               ],
+                      "problemMatcher":  [
+
+                                         ]
+                  }
+              ]
+}

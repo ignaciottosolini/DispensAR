@@ -1,0 +1,11 @@
+.dotnet/
+**/bin/
+**/obj/
+**/node_modules/
+**/dist/
+.logs/
+*.user
+.env
+**/.env.local
+
+backend/DispensAR.Api/storage/
