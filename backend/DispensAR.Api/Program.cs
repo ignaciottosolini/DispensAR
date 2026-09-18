@@ -10,6 +10,7 @@ using DispensAR.Api.Dashboard;
 using DispensAR.Api.Pacientes;
 using DispensAR.Api.Catalogos;
 using DispensAR.Api.Identidad;
+using Microsoft.AspNetCore.DataProtection;
 
 var migrate = args.Contains("--migrate");
 var createAccount = args.Contains("--create-account");
@@ -17,6 +18,13 @@ var assignRole = args.Contains("--assign-role");
 var assignPlatformAdmin = args.Contains("--assign-platform-admin");
 var builder = WebApplication.CreateBuilder(args.Where(a => a != "--migrate" && a != "--create-account" && a != "--assign-role" && a != "--assign-platform-admin").ToArray());
 builder.AddAccountAuthentication();
+var keysPath = builder.Configuration["DataProtection:KeysPath"];
+if (!string.IsNullOrWhiteSpace(keysPath))
+{
+    Directory.CreateDirectory(keysPath);
+    builder.Services.AddDataProtection().SetApplicationName("DispensAR")
+        .PersistKeysToFileSystem(new DirectoryInfo(keysPath));
+}
 builder.Services.AddProblemDetails();
 builder.Services.AddScoped<TenantContext>();
 builder.Services.AddSingleton<IAlmacenamientoLogos, AlmacenamientoLogosLocales>();
@@ -63,6 +71,8 @@ if (createAccount)
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseRateLimiter();
+app.UseDefaultFiles();
+app.UseStaticFiles();
 // Validate all cookie-authenticated mutations, including anonymous login, against CSRF.
 app.Use(async (context, next) =>
 {
@@ -83,8 +93,7 @@ app.Use(async (context, next) =>
 });
 app.MapAccountEndpoints();
 
-// Business endpoints remain local until production deployment/roles are configured.
-if (app.Environment.IsDevelopment())
+// Business endpoints use the same authorization and tenant isolation in every environment.
 {
     var api = app.MapGroup("/api").RequireAuthorization();
     api.AddEndpointFilter(async (invocation, next) =>
@@ -174,6 +183,9 @@ if (app.Environment.IsDevelopment())
         return Results.Created($"/api/users/{user.Id}", new { user.Id, user.DisplayName, user.Email });
     }).RequireAuthorization("TenantOperations");
 }
+// Unknown API routes must return 404, never the React HTML fallback.
+app.MapFallback("/api/{**path}", () => Results.NotFound());
+app.MapFallbackToFile("index.html");
 app.Run();
 record BranchInput(string? Name);
 record UserInput(string? DisplayName, string? Email);

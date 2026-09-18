@@ -1,0 +1,63 @@
+name: Publicar demo en Azure
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: azure-demo
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - name: Compilar aplicacion completa
+        shell: pwsh
+        run: ./scripts/publish-demo.ps1
+      - name: Generar SQL revisable sin conectar a una base
+        run: |
+          dotnet tool restore
+          dotnet ef migrations script --idempotent --project backend/DispensAR.Api --configuration Release --no-build --output artifacts/migrations.sql
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dispensar-demo
+          path: artifacts/demo/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: migraciones-demo
+          path: artifacts/migrations.sql
+
+  deploy:
+    needs: build
+    if: ${{ vars.AZURE_WEBAPP_NAME != '' }}
+    runs-on: ubuntu-latest
+    environment: demo
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dispensar-demo
+          path: package
+      - uses: azure/login@v2
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+      - uses: azure/webapps-deploy@v3
+        with:
+          app-name: ${{ vars.AZURE_WEBAPP_NAME }}
+          package: package

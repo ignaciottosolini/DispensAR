@@ -289,3 +289,6 @@ amplía su área táctil sin cambiar de tamaño. Se desactivó el zoom por foco 
 iOS (los controles ya usan 16px) y el estado `:hover` solo aplica con mouse.
 El diseño responsive no se verificó en un dispositivo real: probá en Chrome
 DevTools (360px) y en el celular el menú, una tabla, un formulario y el login.
+# Demo en Azure
+
+La preparacion del despliegue gratuito, las variables y los pasos pendientes estan en [AZURE-DEMO.md](AZURE-DEMO.md). El workflow es manual y no aplica migraciones automaticamente.
