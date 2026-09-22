@@ -1,6 +1,8 @@
 # Demo gratuita en Azure
 
-Estado: paquete y workflow preparados. No hay recursos Azure ni base remota creados por estos cambios.
+Recursos de demo configurados: App Service `dispensar-demo` (Linux F1, West US 3) y base `free-sql-db-1539727` en `dispensar-sql-ignaciottosolini` (oferta gratuita, AutoPause al agotar el cupo). Las migraciones y el alta del administrador fueron ejecutadas por el operador.
+
+GitHub utiliza la identidad `dispensar-github-demo`, con Website Contributor limitado al App Service. Las variables del repositorio y el environment `demo` estan configurados. Para publicar una nueva version: Actions > Publicar demo en Azure > Run workflow, rama main. El workflow no modifica el esquema ni crea cuentas.
 
 ## Arquitectura
 
@@ -8,7 +10,7 @@ React compilado se publica dentro de `wwwroot` de la API .NET 10. El navegador u
 
 Destino previsto: App Service Linux, publicacion de codigo .NET 10, plan Free F1 y Azure SQL Database con la oferta gratuita. Confirmar disponibilidad en la suscripcion y region antes de crear. No aceptar una sustitucion automatica por Basic ni activar cargos adicionales de SQL.
 
-## Cuenta y recursos pendientes
+## Referencia para crear los recursos
 
 1. Crear una cuenta en https://azure.microsoft.com/free/ y completar personalmente la verificacion requerida.
 2. Comprobar la suscripcion y elegir una region que admita ambos recursos gratuitos.
@@ -51,9 +53,11 @@ Una vez creado App Service, configurar una identidad de despliegue con OIDC y pe
 
 ```text
 issuer: https://token.actions.githubusercontent.com
-subject: repo:ignaciottosolini/DispensAR:environment:demo
+subject: repo:ignaciottosolini@96127714/DispensAR@1376259756:environment:demo
 audience: api://AzureADTokenExchange
 ```
+
+El subject anterior fue verificado contra el token presentado por GitHub en este repositorio; contiene los identificadores estables del propietario y del repositorio. Para otros repositorios verificar el subject real en el paso azure/login y no copiarlo literalmente.
 
 Crear el environment `demo` en GitHub y estas **variables del repositorio**:
 
